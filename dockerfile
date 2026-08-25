@@ -1,11 +1,11 @@
-# Build-Phase
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Build-Phase mit .NET SDK (hier auf .NET 10 aktualisiert)
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /app
 COPY . .
 RUN dotnet publish -c Release -o out
 
-# Laufzeit-Phase
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Laufzeit-Phase mit .NET ASP.NET Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 COPY --from=build /app/out .
 EXPOSE 8080
